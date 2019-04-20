@@ -1,7 +1,7 @@
 
 REPOSITORY=cybermaggedon/zookeeper
 VERSION=$(shell git describe | sed 's/^v//')
-ZOOKEEPER_VERSION=3.4.12
+ZOOKEEPER_VERSION=3.4.14
 
 SUDO=
 BUILD_ARGS=--build-arg ZOOKEEPER_VERSION=${ZOOKEEPER_VERSION}

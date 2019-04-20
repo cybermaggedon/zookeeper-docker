@@ -1,15 +1,12 @@
 
-FROM fedora:28
-
-MAINTAINER cybermaggedon
+FROM fedora:29
 
 ARG ZOOKEEPER_VERSION=3.4.10
 
-RUN dnf install -y java-1.8.0-openjdk
+RUN dnf update -y && \
+    dnf install -y java-1.8.0-openjdk && dnf update -y && dnf clean all
 
 RUN echo -e "\n* soft nofile 65536\n* hard nofile 65536" >> /etc/security/limits.conf
-
-RUN dnf install -y tar
 
 ADD zookeeper-${ZOOKEEPER_VERSION}.tar.gz /usr/local/
 RUN ln -s /usr/local/zookeeper-${ZOOKEEPER_VERSION} /usr/local/zookeeper
