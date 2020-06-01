@@ -1,20 +1,24 @@
 
 REPOSITORY=cybermaggedon/zookeeper
 VERSION=$(shell git describe | sed 's/^v//')
-ZOOKEEPER_VERSION=3.4.14
+ZOOKEEPER_VERSION=3.6.1
+DOCKER=docker
+URL=http://apache.mirror.anlx.net/zookeeper/zookeeper-${ZOOKEEPER_VERSION}/apache-zookeeper-${ZOOKEEPER_VERSION}-bin.tar.gz
 
 SUDO=
 BUILD_ARGS=--build-arg ZOOKEEPER_VERSION=${ZOOKEEPER_VERSION}
 
 all: zookeeper-${ZOOKEEPER_VERSION}.tar.gz
-	${SUDO} docker build ${BUILD_ARGS} -t ${REPOSITORY}:${VERSION} .
+	${SUDO} ${DOCKER} build ${BUILD_ARGS} -t ${REPOSITORY}:${VERSION} .
+	${SUDO} ${DOCKER} tag ${REPOSITORY}:${VERSION} ${REPOSITORY}:latest
 
 # FIXME: May not be the right mirror for you.
 zookeeper-${ZOOKEEPER_VERSION}.tar.gz:
-	wget -q -O $@ http://www.mirrorservice.org/sites/ftp.apache.org/zookeeper/zookeeper-${ZOOKEEPER_VERSION}/zookeeper-${ZOOKEEPER_VERSION}.tar.gz
+	wget -q -O $@ ${URL}
 
 push:
-	${SUDO} docker push ${REPOSITORY}:${VERSION}
+	${SUDO} ${DOCKER} push ${REPOSITORY}:${VERSION}
+	${SUDO} ${DOCKER} push ${REPOSITORY}:latest
 
 # Continuous deployment support
 BRANCH=master
