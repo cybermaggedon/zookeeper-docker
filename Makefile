@@ -1,7 +1,7 @@
 
 REPOSITORY=cybermaggedon/zookeeper
 VERSION=$(shell git describe | sed 's/^v//')
-ZOOKEEPER_VERSION=3.6.1
+ZOOKEEPER_VERSION=3.8.1
 DOCKER=docker
 URL=http://apache.mirror.anlx.net/zookeeper/zookeeper-${ZOOKEEPER_VERSION}/apache-zookeeper-${ZOOKEEPER_VERSION}-bin.tar.gz
 

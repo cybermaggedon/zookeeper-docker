@@ -1,7 +1,7 @@
 
-FROM fedora:32
+FROM fedora:37
 
-ARG ZOOKEEPER_VERSION=3.4.10
+ARG ZOOKEEPER_VERSION=3.8.1
 
 RUN dnf update -y && \
     dnf install -y java-1.8.0-openjdk net-tools && \
